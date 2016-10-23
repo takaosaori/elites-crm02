@@ -2,6 +2,8 @@ class Customer < ActiveRecord::Base
   
     belongs_to :company
     
+    belongs_to :post
+    
     validates :family_name,
     presence: true, length: { maximum: 20 }
     validates :given_name,
@@ -10,6 +12,8 @@ class Customer < ActiveRecord::Base
     validates :email,
     presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: true
     validates :company_id,
+    presence: true
+    validates :post_id,
     presence: true
     
     def full_name
