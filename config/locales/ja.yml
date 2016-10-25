@@ -15,6 +15,7 @@ ja:
         family_name: "姓"
         given_name: "名"
         email: "メールアドレス"
+        image_url: "プロフィール画像"
         company_id: "所属会社"
         post_id: "役職"
           

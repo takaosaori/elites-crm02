@@ -1,6 +1,6 @@
 class CustomersController < ApplicationController
   before_action :customer_set, only: [:show, :edit, :update, :destroy]  
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:index, :show, :new, :create, :edit, :update, :destroy]
   
   def index
     # @customers = Customer.all
