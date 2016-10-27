@@ -3,7 +3,7 @@
      <h1>顧客詳細</h1>
      <dl>
        <dt>お名前</dt>
-       <dd style="margin:0px 0px 10px 20px"><%= @customer.full_name %> </dd>
+       <dd style="margin:0px 0px 10px 20px"><%= @customer.full_name %></dd>
        <dt>メールアドレス</dt>
        <dd style="margin:0px 0px 10px 20px"><%= @customer.email %></dd>
        <dt>所属会社</dt>
@@ -15,10 +15,10 @@
      <%= link_to "戻る", customers_path, class: "btn btn-default" %>
      
      <h2>対応履歴</h2>
-     <%= @comments.each do |comment| %>
+     <% @comments.each do |comment| %>
      <div class="media">
       <div class="media-body">
-       <%= comment.body %>
+       <%= simple_format(comment.body) %>
        <p class="text-muted">
          投稿記事:<%= comment.created_at.strftime('%Y%m%d %H:%M') %>
          <%= link_to "削除する", comment_path(comment), method: :delete %>
@@ -29,12 +29,36 @@
      
      <hr />
      <%= form_for(@comment, url: { controller: :comments, action: :create }) do |f| %>
+     
+     <% if @comment.errors.any? %>
+       <div class="alert alert-danger">
+         <p><b><%= @comment.errors.count %>件のエラーがあります</b></p>
+
+         <ul>
+           <% @comment.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+           <% end %>
+         </ul>
+       </div>
+     <% end %>
+     
+     <%= image_tag current_user.image_url, :alt => "プロフィール画像", :width => "80" %>
+     
      <div class="form-group">
       <%= f.label :body, "対応内容" %>
       <%= f.text_area :body, class:"form-control" %>
      </div>
      <%= f.hidden_field :customer_id, value: @customer.id %>
      <%= f.submit class: "btn btn-default" %>
+     
+    <!--<% if flash[:error].present? %>-->
+    <!--<ul class="errors">-->
+    <!--  <% flash[:error].each do |e| %>-->
+    <!--    <li><%= e %></li>-->
+    <!--  <% end %>-->
+    <!--</ul>-->
+    <!--<% end %>-->
+     
      <% end %>
      
      
