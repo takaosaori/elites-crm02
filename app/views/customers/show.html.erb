@@ -16,11 +16,10 @@
      
      <h2>対応履歴</h2>
      <% @comments.each do |comment| %>
-      <!--<img src= comment.user.image_url >-->
      <div class="media">
-        <a class="media-left">
-         <%= image_tag comment.user.image_url, :width => "80" %>
-        </a>
+        <div class="media-left">
+         <%= image_tag comment.user.image_url, width: 80 %>
+        </div>
        <div class="media-body">
          <%= simple_format(comment.body) %>
         <p class="text-muted">
